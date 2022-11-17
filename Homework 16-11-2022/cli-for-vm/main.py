@@ -4,7 +4,7 @@ import argparse
 parser = argparse.ArgumentParser(description = 'Programm CLI')
 parser.add_argument('--machines', '-m', action='store_true',)
 parser.add_argument('--launch', '-l', help="Escribe el nombre de la maquina a usar" )
-parser.add_argument('--create', '-c', action='store_true', )
+parser.add_argument('--create', '-c', )
 parser.add_argument('--close', '-cls', action='store_true', )
 
 vbox = virtualbox.VirtualBox()
@@ -15,12 +15,12 @@ def getMachines():
     for machine in listMachines:
         print(machine)
 
-def newMachine():
-    m = vbox.create_machine("",sys.argv[2],['/test'],"Linux",'forceOverwrite=0')
+def newMachine(newMachine):
+    m = vbox.create_machine("",newMachine,['/'],"",'')
     vbox.register_machine(m)
 
-#def closeMachine():
-#    session.console.power_down()
+def closeMachine():
+    session.console.power_down()
 
 def launchMachine(machineName):
     session = virtualbox.Session()
@@ -35,7 +35,11 @@ if __name__ == '__main__':
 
     if args.machines:
         getMachines()
+    elif args.close:
+        closeMachine()
     elif args.launch:
         launchMachine(args.launch)  
+    elif args.create:
+        newMachine(args.create) 
     else:
         print("no hay opcion con -h")

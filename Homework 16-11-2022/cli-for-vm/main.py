@@ -6,6 +6,7 @@ parser.add_argument('--machines', '-m', action='store_true',)
 parser.add_argument('--launch', '-l', help="Escribe el nombre de la maquina a usar" )
 parser.add_argument('--create', '-c', )
 parser.add_argument('--close', '-cls', action='store_true', )
+parser.add_argument('--delete', '-d', help="Escribe el nombre de la maquina a borrar" )
 
 vbox = virtualbox.VirtualBox()
 listMachines=[m.name for m in vbox.machines]
@@ -21,6 +22,10 @@ def newMachine(newMachine):
 
 def closeMachine():
     session.console.power_down()
+
+def deleteMachine(machine_to_delete):
+    dm = vbox.find_machine(machine_to_delete)
+    dm.remove(delete=True)
 
 def launchMachine(machineName):
     session = virtualbox.Session()
@@ -41,5 +46,7 @@ if __name__ == '__main__':
         launchMachine(args.launch)  
     elif args.create:
         newMachine(args.create) 
+    elif args.deleteMachine:
+        deleteMachine(args.deleteMachine) 
     else:
-        print("no hay opcion con -h")
+        print("no hay opcion con ese msg -h")

@@ -4,7 +4,7 @@ pipeline {
     agent any
     
     stages{
-        stage(""){
+        stage("build"){
             steps{
                 echo 'Building the application'
             }
@@ -23,29 +23,4 @@ pipeline {
     
     }
 }
-=======
-pipeline {
 
-    agent any
-    
-    stages{
-        stage(""){
-            steps{
-                echo 'Building the application'
-            }
-        }
-        stage("test"){
-            steps{
-                sh 'chmod +x helloWorld.sh'
-                sh './helloWorld.sh'
-            }
-        }
-        stage("deploy"){
-            steps{
-                echo 'Deploying the application'
-            }
-        }
-    
-    }
-}
->>>>>>> b8cab2ee75cb73dbb3dfb47a0279afedafd7eaca

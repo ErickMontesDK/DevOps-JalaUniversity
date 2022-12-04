@@ -10,5 +10,3 @@ async function searching() {
     .click();
 }
 searching();
-
-//ThingCardBody__cardBodyWrapper--ba5pu
